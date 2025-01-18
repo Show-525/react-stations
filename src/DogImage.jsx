@@ -1,9 +1,7 @@
 // @ts-check
 
-export const DogImage = () => {
+export const DogImage = ({ imageUrl }) => {
   return (
-    <img src="https://images.dog.ceo/breeds/spaniel-brittany/n02101388_6057.jpg" />
-  )
-}
-
-export default DogImage
+    <img src={imageUrl} alt="dog" />
+  );
+};
