@@ -5,12 +5,15 @@
  */
 
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './Header';
 import Description from './Description';
+import DogListContainer from './DogListContainer';
 
 export const App = () => {
   const [dogUrl, setDogUrl] = useState('https://images.dog.ceo/breeds/spaniel-brittany/n02101388_6057.jpg');
+  const [breeds, setbreeds] = useState(['https://dog.ceo/api/breeds/list/all']);
+
 
   const randomImage = () => {
     fetch('https://dog.ceo/api/breeds/image/random')
@@ -18,16 +21,24 @@ export const App = () => {
       .then((data) => setDogUrl(data.message));
   };
 
-  return (
-    <div>
-      <Header />
-      <Description dogUrl={dogUrl} randomImage={randomImage} />
-    </div>
-  );
-};
+  useEffect(() => {
+    fetch('https://dog.ceo/api/breeds/list/all')
+      .then((res) => res.json())
+      .then((data) => setbreeds(data.message));
+  }, []);
+
+    return (
+      <div>
+        <Header />
+        <Description dogUrl={dogUrl} randomImage={randomImage} />
+        <DogListContainer breeds={breeds} />
+      </div>
+    );
+  };
 
 
-// // DO NOT DELETE
+
+// // // DO NOT DELETE
 
 // import './App.css'
 // import { useState } from 'react';
