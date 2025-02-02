@@ -36,7 +36,7 @@ export const App = () => {
     );
   };
 
-
+  export default App;
 
 // // // DO NOT DELETE
 
